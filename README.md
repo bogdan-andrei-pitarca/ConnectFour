@@ -13,3 +13,13 @@ Connect Four is a classic two-player strategy game where players take turns drop
 3. Wait for the AI to take a turn.
 4. Be the first to have four connecting chips
 5. Have FUN!
+
+# Features 🪄
+
+- ***Adjustable difficulty levels***: Play against an AI, either on Easy, Medium or Hard mode.
+- ***Win/draw detection***: Automatically specifies who won the game, or if it ended in a draw.
+- ***User-friendly interface***: Boists a compact, neat and intuitive interface that brings the game to life.
+
+# Prerequisites
+
+Python 3.12 or higher
