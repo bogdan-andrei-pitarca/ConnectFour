@@ -62,6 +62,19 @@ class Game:
         self._board.board[self.valid_row(column)][column]=self.get_player()+1
         self.switch_player()
 
+    def undo_move(self, column):
+        """
+        function that undoes the last move in the given column by resetting the top-most non-empty cell
+        :param column: int
+        :raises: GameError, if the column is already empty
+        """
+        for row in range(5, -1, -1):
+            if self._board.board[row][column] != 0:
+                self._board.board[row][column] = 0
+                self.switch_player()
+                return
+        raise GameError("No moves to undo in this column.")
+
     def valid_move(self,column):
         """
         function that determines whether a move is valid or not

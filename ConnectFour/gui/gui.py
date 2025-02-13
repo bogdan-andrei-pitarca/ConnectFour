@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from exceptions.errors import GameError
 from game.game import Game
 from players.human import HumanPlayer
@@ -16,13 +16,21 @@ class GUI:
         self.root = tk.Tk()
         self.root.title("Connect Four")
         self._game = Game()
-        self._ai = AIPlayer(self._game)
+        self.difficulty = self.choose_difficulty()
+        self._ai = AIPlayer(self._game, difficulty=self.difficulty)
         self._human = HumanPlayer("Bogdan", self._game)
         self.chips = ["\U000026aa", "\U0001f534", "\U0001f7e1"]
         self.buttons = []
         self.labels = []
         self.create_widgets()
 
+    def choose_difficulty(self):
+        """
+        choose easy, medium or hard difficulty (defaults to easy)
+        """
+        difficulty_levels = {"Easy": 1, "Medium": 2, "Hard": 3}
+        choice = simpledialog.askstring("Difficulty", "Choose AI difficulty: Easy, Medium, or Hard")
+        return difficulty_levels.get(choice, 1)
     def create_widgets(self):
         """
            used for creating the buttons, as well as the board
@@ -46,7 +54,6 @@ class GUI:
         for row in range(6):
             for col in range(7):
                 self.labels[row][col].config(text=self.chips[board[row][col]])
-
 
     def player_move(self, column):
         """ handles the player moves and checks for win conditions """

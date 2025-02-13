@@ -5,8 +5,18 @@ from players.computer import AIPlayer
 class UI:
     def __init__(self):
         self._game=Game()
-        self._ai=AIPlayer(self._game)
+        self.difficulty = self.choose_difficulty()
+        self._ai=AIPlayer(self._game, difficulty=self.difficulty)
         self._human=HumanPlayer("Bogdan", self._game)
+
+
+    def choose_difficulty(self):
+        """
+        choose easy, medium or hard difficulty (defaults to easy)
+        """
+        difficulty_levels = {"Easy": 1, "Medium": 2, "Hard": 3}
+        choice = input("Choose AI difficulty: Easy, Medium, or Hard\n")
+        return difficulty_levels.get(choice, 1)
 
     def print_board(self):
         board = self._game.get_board()
